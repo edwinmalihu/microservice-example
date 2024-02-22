@@ -1,0 +1,828 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Service API in Go Using Gin framework",
+        "title": "Synapsis E-commerce API",
+        "contact": {}
+    },
+    "host": "43.218.113.72:8081",
+    "basePath": "/api",
+    "paths": {
+        "/api/order/add": {
+            "post": {
+                "description": "Add Product to Order",
+                "produces": [
+                    "applicaton/json"
+                ],
+                "tags": [
+                    "order-service"
+                ],
+                "summary": "Create Order",
+                "parameters": [
+                    {
+                        "description": "Create Order",
+                        "name": "cary",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.AddOrder"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ResponsOrder"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/payment/add": {
+            "post": {
+                "description": "Add order to payment",
+                "produces": [
+                    "applicaton/json"
+                ],
+                "tags": [
+                    "payment-service"
+                ],
+                "summary": "Create Paymenr",
+                "parameters": [
+                    {
+                        "description": "Payment Order",
+                        "name": "cary",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.RequestAddPayment"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ResponseSuccessPayment"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/payment/delete": {
+            "delete": {
+                "description": "Delete Payment Order",
+                "produces": [
+                    "applicaton/json"
+                ],
+                "tags": [
+                    "payment-service"
+                ],
+                "summary": "Delete Payment",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Payment ID",
+                        "name": "payment_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/shop/add": {
+            "post": {
+                "description": "Add Product to Cart",
+                "produces": [
+                    "applicaton/json"
+                ],
+                "tags": [
+                    "cart-service"
+                ],
+                "summary": "Create Cart",
+                "parameters": [
+                    {
+                        "description": "Create Cart",
+                        "name": "cary",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.RequestAddCart"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ResponseSuccessCart"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/shop/delete": {
+            "delete": {
+                "description": "Delete Product from Cart",
+                "produces": [
+                    "applicaton/json"
+                ],
+                "tags": [
+                    "cart-service"
+                ],
+                "summary": "Delete Cart",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "cart ID",
+                        "name": "cart_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ResponseCart"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/shop/detail": {
+            "get": {
+                "description": "Detail Product from Cart",
+                "produces": [
+                    "applicaton/json"
+                ],
+                "tags": [
+                    "cart-service"
+                ],
+                "summary": "Detail Cart",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "cart ID",
+                        "name": "cart_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ResponseCart"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/shop/list": {
+            "get": {
+                "description": "List Cart",
+                "produces": [
+                    "applicaton/json"
+                ],
+                "tags": [
+                    "cart-service"
+                ],
+                "summary": "List Cart",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ResponseCart"
+                        }
+                    }
+                }
+            }
+        },
+        "/category/add": {
+            "post": {
+                "description": "Create Category",
+                "produces": [
+                    "applicaton/json"
+                ],
+                "tags": [
+                    "category-service"
+                ],
+                "summary": "Create Category",
+                "parameters": [
+                    {
+                        "description": "Signin",
+                        "name": "signin",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.RequestAdd"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ResponseCategory"
+                        }
+                    }
+                }
+            }
+        },
+        "/category/detail": {
+            "get": {
+                "description": "Detail Category",
+                "produces": [
+                    "applicaton/json"
+                ],
+                "tags": [
+                    "category-service"
+                ],
+                "summary": "Detail Category",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Category ID",
+                        "name": "category_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ResponseCategory"
+                        }
+                    }
+                }
+            }
+        },
+        "/category/list": {
+            "get": {
+                "description": "List Categor",
+                "produces": [
+                    "applicaton/json"
+                ],
+                "tags": [
+                    "category-service"
+                ],
+                "summary": "List Category",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.ResponseCategory"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/category/update": {
+            "post": {
+                "description": "Update Category",
+                "produces": [
+                    "applicaton/json"
+                ],
+                "tags": [
+                    "category-service"
+                ],
+                "summary": "Update Category",
+                "parameters": [
+                    {
+                        "description": "Signin",
+                        "name": "signin",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.RequestUpdateCategory"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ResponseCategory"
+                        }
+                    }
+                }
+            }
+        },
+        "/product/add": {
+            "post": {
+                "description": "Create Product",
+                "produces": [
+                    "applicaton/json"
+                ],
+                "tags": [
+                    "product-service"
+                ],
+                "summary": "Create Product",
+                "parameters": [
+                    {
+                        "description": "Create Product",
+                        "name": "CreateProduct",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.RequestAddProduct"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ResponseSucessProduct"
+                        }
+                    }
+                }
+            }
+        },
+        "/product/detail": {
+            "get": {
+                "description": "Detail Product",
+                "produces": [
+                    "applicaton/json"
+                ],
+                "tags": [
+                    "product-service"
+                ],
+                "summary": "Detail Product",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Product ID",
+                        "name": "product_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ResponseDetailProduct"
+                        }
+                    }
+                }
+            }
+        },
+        "/product/list": {
+            "get": {
+                "description": "List Product",
+                "produces": [
+                    "applicaton/json"
+                ],
+                "tags": [
+                    "product-service"
+                ],
+                "summary": "List Product",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ResponseDetailProduct"
+                        }
+                    }
+                }
+            }
+        },
+        "/product/listby-category": {
+            "get": {
+                "description": "List Product by Category",
+                "produces": [
+                    "applicaton/json"
+                ],
+                "tags": [
+                    "product-service"
+                ],
+                "summary": "List Product by Category",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Category ID",
+                        "name": "category_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ResponseDetailProduct"
+                        }
+                    }
+                }
+            }
+        },
+        "/product/update": {
+            "post": {
+                "description": "Update Product",
+                "produces": [
+                    "applicaton/json"
+                ],
+                "tags": [
+                    "product-service"
+                ],
+                "summary": "Update Product",
+                "parameters": [
+                    {
+                        "description": "Update Product",
+                        "name": "UpdateProduct",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.RequestUpdateProduct"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ResponseSucessProduct"
+                        }
+                    }
+                }
+            }
+        },
+        "/register/": {
+            "post": {
+                "description": "Create User",
+                "produces": [
+                    "applicaton/json"
+                ],
+                "tags": [
+                    "customer-service"
+                ],
+                "summary": "Register",
+                "parameters": [
+                    {
+                        "description": "Signin",
+                        "name": "signin",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.AddCustomer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.SuccessAddCustomer"
+                        }
+                    }
+                }
+            }
+        },
+        "/signin/": {
+            "post": {
+                "description": "Authentication and Unauthorized User",
+                "produces": [
+                    "applicaton/json"
+                ],
+                "tags": [
+                    "customer-service"
+                ],
+                "summary": "Signin",
+                "parameters": [
+                    {
+                        "description": "Signin",
+                        "name": "signin",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Login"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Login"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "model.AddCustomer": {
+            "type": "object",
+            "required": [
+                "email"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.AddOrder": {
+            "type": "object",
+            "properties": {
+                "customer_id": {
+                    "type": "integer"
+                },
+                "order_date": {
+                    "type": "string"
+                },
+                "product_id": {
+                    "type": "integer"
+                },
+                "qty": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "total_amount": {
+                    "type": "number"
+                }
+            }
+        },
+        "model.Login": {
+            "type": "object",
+            "properties": {
+                "password": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.RequestAdd": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.RequestAddCart": {
+            "type": "object",
+            "properties": {
+                "customer_id": {
+                    "type": "integer"
+                },
+                "product_id": {
+                    "type": "integer"
+                },
+                "qty": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.RequestAddPayment": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "number"
+                },
+                "order_id": {
+                    "type": "integer"
+                },
+                "payment_date": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.RequestAddProduct": {
+            "type": "object",
+            "properties": {
+                "category_id": {
+                    "type": "integer"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "stok": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.RequestUpdateCategory": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "category_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.RequestUpdateProduct": {
+            "type": "object",
+            "properties": {
+                "category_id": {
+                    "type": "integer"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "product_id": {
+                    "type": "integer"
+                },
+                "stok": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.ResponsOrder": {
+            "type": "object",
+            "properties": {
+                "msg": {
+                    "type": "string"
+                },
+                "order_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.Response": {
+            "type": "object",
+            "properties": {
+                "data": {},
+                "error_code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "model.ResponseCart": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "product_id": {
+                    "type": "integer"
+                },
+                "qty": {
+                    "type": "integer"
+                },
+                "total_amount": {
+                    "type": "number"
+                }
+            }
+        },
+        "model.ResponseCategory": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "category_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.ResponseDetailProduct": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "string": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.ResponseSuccessCart": {
+            "type": "object",
+            "properties": {
+                "msg": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "product_id": {
+                    "type": "integer"
+                },
+                "qty": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.ResponseSuccessPayment": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "number"
+                },
+                "payment_date": {
+                    "type": "string"
+                },
+                "payment_id": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.ResponseSucessProduct": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "messege": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "string": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.SuccessAddCustomer": {
+            "type": "object",
+            "required": [
+                "email"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

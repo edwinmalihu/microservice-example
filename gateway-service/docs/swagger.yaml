@@ -1,0 +1,537 @@
+basePath: /api
+definitions:
+  model.AddCustomer:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - email
+    type: object
+  model.AddOrder:
+    properties:
+      customer_id:
+        type: integer
+      order_date:
+        type: string
+      product_id:
+        type: integer
+      qty:
+        type: integer
+      status:
+        type: string
+      total_amount:
+        type: number
+    type: object
+  model.Login:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  model.RequestAdd:
+    properties:
+      category:
+        type: string
+    type: object
+  model.RequestAddCart:
+    properties:
+      customer_id:
+        type: integer
+      product_id:
+        type: integer
+      qty:
+        type: integer
+    type: object
+  model.RequestAddPayment:
+    properties:
+      amount:
+        type: number
+      order_id:
+        type: integer
+      payment_date:
+        type: string
+      status:
+        type: string
+    type: object
+  model.RequestAddProduct:
+    properties:
+      category_id:
+        type: integer
+      description:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+      stok:
+        type: integer
+    type: object
+  model.RequestUpdateCategory:
+    properties:
+      category:
+        type: string
+      category_id:
+        type: integer
+    type: object
+  model.RequestUpdateProduct:
+    properties:
+      category_id:
+        type: integer
+      description:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+      product_id:
+        type: integer
+      stok:
+        type: integer
+    type: object
+  model.ResponsOrder:
+    properties:
+      msg:
+        type: string
+      order_id:
+        type: integer
+    type: object
+  model.Response:
+    properties:
+      data: {}
+      error_code:
+        type: string
+      message:
+        type: string
+      status:
+        type: integer
+      success:
+        type: boolean
+    type: object
+  model.ResponseCart:
+    properties:
+      name:
+        type: string
+      product_id:
+        type: integer
+      qty:
+        type: integer
+      total_amount:
+        type: number
+    type: object
+  model.ResponseCategory:
+    properties:
+      category:
+        type: string
+      category_id:
+        type: integer
+    type: object
+  model.ResponseDetailProduct:
+    properties:
+      category:
+        type: string
+      description:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+      string:
+        type: integer
+    type: object
+  model.ResponseSuccessCart:
+    properties:
+      msg:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+      product_id:
+        type: integer
+      qty:
+        type: integer
+    type: object
+  model.ResponseSuccessPayment:
+    properties:
+      amount:
+        type: number
+      payment_date:
+        type: string
+      payment_id:
+        type: integer
+      status:
+        type: string
+    type: object
+  model.ResponseSucessProduct:
+    properties:
+      category:
+        type: string
+      description:
+        type: string
+      messege:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+      string:
+        type: integer
+    type: object
+  model.SuccessAddCustomer:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - email
+    type: object
+host: 43.218.113.72:8081
+info:
+  contact: {}
+  description: Service API in Go Using Gin framework
+  title: Synapsis E-commerce API
+paths:
+  /api/order/add:
+    post:
+      description: Add Product to Order
+      parameters:
+      - description: Create Order
+        in: body
+        name: cary
+        required: true
+        schema:
+          $ref: '#/definitions/model.AddOrder'
+      produces:
+      - applicaton/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ResponsOrder'
+      summary: Create Order
+      tags:
+      - order-service
+  /api/payment/add:
+    post:
+      description: Add order to payment
+      parameters:
+      - description: Payment Order
+        in: body
+        name: cary
+        required: true
+        schema:
+          $ref: '#/definitions/model.RequestAddPayment'
+      produces:
+      - applicaton/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ResponseSuccessPayment'
+      summary: Create Paymenr
+      tags:
+      - payment-service
+  /api/payment/delete:
+    delete:
+      description: Delete Payment Order
+      parameters:
+      - description: Payment ID
+        in: query
+        name: payment_id
+        required: true
+        type: string
+      produces:
+      - applicaton/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      summary: Delete Payment
+      tags:
+      - payment-service
+  /api/shop/add:
+    post:
+      description: Add Product to Cart
+      parameters:
+      - description: Create Cart
+        in: body
+        name: cary
+        required: true
+        schema:
+          $ref: '#/definitions/model.RequestAddCart'
+      produces:
+      - applicaton/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ResponseSuccessCart'
+      summary: Create Cart
+      tags:
+      - cart-service
+  /api/shop/delete:
+    delete:
+      description: Delete Product from Cart
+      parameters:
+      - description: cart ID
+        in: query
+        name: cart_id
+        required: true
+        type: string
+      produces:
+      - applicaton/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ResponseCart'
+      summary: Delete Cart
+      tags:
+      - cart-service
+  /api/shop/detail:
+    get:
+      description: Detail Product from Cart
+      parameters:
+      - description: cart ID
+        in: query
+        name: cart_id
+        required: true
+        type: string
+      produces:
+      - applicaton/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ResponseCart'
+      summary: Detail Cart
+      tags:
+      - cart-service
+  /api/shop/list:
+    get:
+      description: List Cart
+      produces:
+      - applicaton/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ResponseCart'
+      summary: List Cart
+      tags:
+      - cart-service
+  /category/add:
+    post:
+      description: Create Category
+      parameters:
+      - description: Signin
+        in: body
+        name: signin
+        required: true
+        schema:
+          $ref: '#/definitions/model.RequestAdd'
+      produces:
+      - applicaton/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ResponseCategory'
+      summary: Create Category
+      tags:
+      - category-service
+  /category/detail:
+    get:
+      description: Detail Category
+      parameters:
+      - description: Category ID
+        in: query
+        name: category_id
+        required: true
+        type: string
+      produces:
+      - applicaton/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ResponseCategory'
+      summary: Detail Category
+      tags:
+      - category-service
+  /category/list:
+    get:
+      description: List Categor
+      produces:
+      - applicaton/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.ResponseCategory'
+            type: array
+      summary: List Category
+      tags:
+      - category-service
+  /category/update:
+    post:
+      description: Update Category
+      parameters:
+      - description: Signin
+        in: body
+        name: signin
+        required: true
+        schema:
+          $ref: '#/definitions/model.RequestUpdateCategory'
+      produces:
+      - applicaton/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ResponseCategory'
+      summary: Update Category
+      tags:
+      - category-service
+  /product/add:
+    post:
+      description: Create Product
+      parameters:
+      - description: Create Product
+        in: body
+        name: CreateProduct
+        required: true
+        schema:
+          $ref: '#/definitions/model.RequestAddProduct'
+      produces:
+      - applicaton/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ResponseSucessProduct'
+      summary: Create Product
+      tags:
+      - product-service
+  /product/detail:
+    get:
+      description: Detail Product
+      parameters:
+      - description: Product ID
+        in: query
+        name: product_id
+        required: true
+        type: string
+      produces:
+      - applicaton/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ResponseDetailProduct'
+      summary: Detail Product
+      tags:
+      - product-service
+  /product/list:
+    get:
+      description: List Product
+      produces:
+      - applicaton/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ResponseDetailProduct'
+      summary: List Product
+      tags:
+      - product-service
+  /product/listby-category:
+    get:
+      description: List Product by Category
+      parameters:
+      - description: Category ID
+        in: query
+        name: category_id
+        required: true
+        type: string
+      produces:
+      - applicaton/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ResponseDetailProduct'
+      summary: List Product by Category
+      tags:
+      - product-service
+  /product/update:
+    post:
+      description: Update Product
+      parameters:
+      - description: Update Product
+        in: body
+        name: UpdateProduct
+        required: true
+        schema:
+          $ref: '#/definitions/model.RequestUpdateProduct'
+      produces:
+      - applicaton/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ResponseSucessProduct'
+      summary: Update Product
+      tags:
+      - product-service
+  /register/:
+    post:
+      description: Create User
+      parameters:
+      - description: Signin
+        in: body
+        name: signin
+        required: true
+        schema:
+          $ref: '#/definitions/model.AddCustomer'
+      produces:
+      - applicaton/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.SuccessAddCustomer'
+      summary: Register
+      tags:
+      - customer-service
+  /signin/:
+    post:
+      description: Authentication and Unauthorized User
+      parameters:
+      - description: Signin
+        in: body
+        name: signin
+        required: true
+        schema:
+          $ref: '#/definitions/model.Login'
+      produces:
+      - applicaton/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Login'
+      summary: Signin
+      tags:
+      - customer-service
+swagger: "2.0"

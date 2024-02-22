@@ -1,0 +1,122 @@
+version: '3.9'
+services:
+  gateway:
+    image: edwinmalihu/ssg:gateway-service-0.0.3
+    environment: 
+      POSTGRES_HOST: postgres
+      POSTGRES_DB: synapsis
+      PORT: "5432"
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      SERVER_PORT: "8081"
+      SSLMODE: disable
+      TIMEZONE: Asia/Jakarta
+      JWT_SECRET: "{*aKV|~ACD$Gm-Sk"
+      SECRET_KEY_SESSION: "synapsis"
+      IDLE_TIMEOUT: "5"
+      SERVICE_HOST_CUSTOMER: "customer:8082"
+      SERVICE_HOST_CATEGORY: "category:8083"
+      SERVICE_HOST_PRODUCT: "product:8084"
+      SERVICE_HOST_CART: "cart:8085"
+      SERVICE_HOST_ORDER: "order:8086"
+      SERVICE_HOST_PAYMENT: "payment:8087"
+    ports:        
+      - "8081:8081"
+    depends_on:
+      - postgres
+    restart: always
+  category:
+    image: edwinmalihu/ssg:category-service-0.0.2
+    environment: 
+      POSTGRES_HOST: postgres
+      POSTGRES_DB: synapsis
+      PORT: "5432"
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      SERVER_PORT: "8083"
+      SSLMODE: disable
+      TIMEZONE: Asia/Jakarta
+    depends_on:
+      - postgres
+    restart: always
+  customer:
+    image: edwinmalihu/ssg:customer-service-0.0.2
+    environment: 
+      POSTGRES_HOST: postgres
+      POSTGRES_DB: synapsis
+      PORT: "5432"
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      SERVER_PORT: "8082"
+      SSLMODE: disable
+      TIMEZONE: Asia/Jakarta
+    depends_on:
+      - postgres
+    restart: always
+  product:
+    image: edwinmalihu/ssg:product-service-0.0.2
+    environment: 
+      POSTGRES_HOST: postgres
+      POSTGRES_DB: synapsis
+      PORT: "5432"
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      SERVER_PORT: "8084"
+      SSLMODE: disable
+      TIMEZONE: Asia/Jakarta
+    depends_on:
+      - postgres
+    restart: always
+  order:
+    image: edwinmalihu/order-service-0.0.1:latest
+    environment: 
+      POSTGRES_HOST: postgres
+      POSTGRES_DB: synapsis
+      PORT: "5432"
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      SERVER_PORT: "8086"
+      SSLMODE: disable
+      TIMEZONE: Asia/Jakarta
+    depends_on:
+      - postgres
+    restart: always
+  cart:
+    image: edwinmalihu/ssg:shopping-cart-service-0.0.1 
+    environment: 
+      POSTGRES_HOST: postgres
+      POSTGRES_DB: synapsis
+      PORT: "5432"
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      SERVER_PORT: "8085"
+      SSLMODE: disable
+      TIMEZONE: Asia/Jakarta
+    depends_on:
+      - postgres
+    restart: always
+  payment:
+    image: edwinmalihu/ssg:payment-service-0.0.1 
+    environment: 
+      POSTGRES_HOST: postgres
+      POSTGRES_DB: synapsis
+      PORT: "5432"
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      SERVER_PORT: "8087"
+      SSLMODE: disable
+      TIMEZONE: Asia/Jakarta
+    depends_on:
+      - postgres
+    restart: always
+  postgres:
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_DB: synapsis
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    expose:
+      - "5432"
+    ports:
+      - "5432:5432"
+    restart: always
